@@ -33,6 +33,11 @@ Rails::Initializer.run do |config|
   # Enable page/fragment caching by setting a file-based store
   # (remember to create the caching directory and make it readable to the application)
   # config.action_controller.fragment_cache_store = :file_store, "#{RAILS_ROOT}/cache"
+
+  config.action_controller.session = {
+    :session_key => '_redmine_session',
+    :secret      => '5452313b448d08a29e90123c4dcb8c3f9c8c139e6b2f414c07718a84b84674b57ae2376c52ba8e9c56c31e368fd1d45b2763db65021329c0fad49f7a1f35a9b8'
+  }
   
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector

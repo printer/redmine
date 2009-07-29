@@ -139,6 +139,26 @@ class ProjectsController < ApplicationController
                                    :conditions => cond).to_f
     end
     @key = User.current.rss_key
+    
+    @days = Setting.activity_days_default.to_i
+    
+    if params[:from]
+      begin; @date_to = params[:from].to_date + 1; rescue; end
+    end
+
+    @date_to ||= Date.today + 1
+    @date_from = @date_to - @days
+    @with_subprojects = params[:with_subprojects].nil? ? Setting.display_subprojects_issues? : (params[:with_subprojects] == '1')
+    @author = (params[:user_id].blank? ? nil : User.active.find(params[:user_id]))
+    
+    @activity = Redmine::Activity::Fetcher.new(User.current, :project => @project, 
+                                                             :with_subprojects => @with_subprojects,
+                                                             :author => @author)
+    @activity.scope_select {|t| !params["show_#{t}"].nil?}
+    @activity.scope = (@author.nil? ? :default : :all) if @activity.scope.empty?
+
+    events = @activity.events(@date_from, @date_to)
+    @events_by_day = events.group_by(&:event_date)
   end
 
   def settings
