@@ -1,0 +1,4 @@
+Capfile
+config/deploy.rb
+log/*
+db/*.sqlite3

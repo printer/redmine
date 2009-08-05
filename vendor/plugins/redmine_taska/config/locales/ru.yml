@@ -1,0 +1,8 @@
+ru:
+    label_users: Пользователи
+    label_state: Сводка
+    label_project_state: Сводка
+    label_admin: Администрирование
+    label_issues_calendar: Календарь
+    label_back_home: К списку проектов
+    label_due_milestones: Майлстоуны на 2 недели

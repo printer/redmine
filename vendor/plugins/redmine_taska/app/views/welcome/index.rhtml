@@ -1,0 +1,61 @@
+<h2><%= l(:label_home) %></h2>
+
+<!-- <% if @projects.any? %>
+<div class="box">
+	<h3 class="icon22 icon22-projects"><%=l(:label_project_latest)%></h3>
+	<ul>
+		<% for project in @projects %>
+		<li>
+			<%= link_to h(project.name), :controller => 'projects', :action => 'show', :id => project %> (<%= format_time(project.created_on) %>)
+			<%= textilizable project.short_description, :project => project %>
+		</li>
+		<% end %>
+	</ul>
+</div>
+<% end %> -->
+
+<% if @calendar.events.any? %>
+<div id="calendar-note"><%= l(:label_due_milestones) %></div>
+<%= render :partial => 'common/calendar', :locals => {:calendar => @calendar, :milestones => true} %>
+<div id="elements-spacer"></div>
+<% end %>
+
+<% if @events.any? %>
+<% @events.each do |project, es| %>
+<table class="activity">
+	<tr>
+		<th colspan="10"><%= link_to h(project.name), :controller => 'projects', :action => 'show', :id => project %></th>
+	</tr>
+	<% es.each do |e| %>
+	<tr style="font-size: 10px; color: rgb(34, 34, 34);">
+		<td style="border-bottom: 1px solid rgb(239, 239, 239); padding: 3px; width: 1%">
+			<div style="padding: 3px; 4px; text-align:right; width: 60px;" class="activity_<%= e.event_type %>"><%= e.event_activity_type %></div>
+		</td>
+		<td style="border-bottom: 1px solid rgb(239, 239, 239);"><%= link_to e.event_title, e.event_url %></td>
+		<td align="right"  style="border-bottom: 1px solid rgb(239, 239, 239); padding-right: 5px;">
+		  <% if e.respond_to?(:event_author) && !e.event_author.blank? %>
+		  <span style="color:gray">разместил</span>&nbsp;&nbsp;<%= e.event_author %>
+		  <% end %>
+		</td>
+		<td  style="border-left: 1px solid rgb(239, 239, 239); border-bottom: 1px solid rgb(239, 239, 239); width:1%; padding-left: 5px;"><%= format_activity_day(e.event_datetime.to_date) %></td>
+	</tr>
+	<% end %>
+</table>
+<% end %>
+
+
+<% content_for :sidebar do %>
+	<h3>Проекты</h3>
+	<% @projects.each do |project| %>
+	    <%= link_to h(project.name), :controller => 'projects', :action => 'show', :id => project %>
+	<% end %>
+<% end %>
+<% end %>
+
+<% content_for :header_tags do %>
+	<%= auto_discovery_link_tag(:atom, {:controller => 'news', :action => 'index', :key => User.current.rss_key, :format => 'atom'},
+	:title => "#{Setting.app_title}: #{l(:label_news_latest)}") %>
+	<%= auto_discovery_link_tag(:atom, {:controller => 'projects', :action => 'activity', :key => User.current.rss_key, :format => 'atom'},
+	:title => "#{Setting.app_title}: #{l(:label_activity)}") %>
+<% end %>
+

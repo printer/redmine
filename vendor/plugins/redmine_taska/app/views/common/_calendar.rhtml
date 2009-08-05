@@ -1,0 +1,50 @@
+<% milestones ||= false %>
+<table class="taska_cal">
+<thead>
+<tr><% 7.times do |i| %><th><%= abbr_day_name( (calendar.first_wday+i)%7 ) %></th><% end %></tr>
+</thead>
+<tbody>
+<tr>
+<% day = calendar.startdt
+while day <= calendar.enddt %>
+<td class="<%= day.month==calendar.month ? 'even' : 'odd' %><%= ' today' if Date.today == day %><%= calendar.events_on(day).any? ? ' filled' : ' empty' %>">
+<p class="day-num"><%= day.day %></p>	
+<% calendar.events_on(day).each do |i| %>
+  <% if i.is_a? Issue %>
+  <div class="tooltip">
+  <% unless milestones %>
+  <%= if day == i.start_date && day == i.due_date
+        image_tag('arrow_bw.png')
+      elsif day == i.start_date
+        image_tag('arrow_from.png') 
+      elsif day == i.due_date
+		image_tag('arrow_to.png') 
+      end %>
+  <% end %>
+  <% unless @project && @project == i.project %>
+    <%= project_abbr("#{i.project}") %>:
+  <% end %>
+  <% unless milestones %>
+  <%= link_to_issue i %>,
+  <% end %>
+  <%= link_to h(truncate(i.subject, :length => 30)), {:controller => "issues", :action => "show", :id => i} %>
+  <% unless milestones %>
+  <span class="tip"><%= render_issue_tooltip i %></span>
+  <% end %>
+  </div>
+  <% else %>
+  <span<% unless milestones %> class="icon icon-package"<% end %>>  
+	<% unless @project && @project == i.project %>
+	    <%= project_abbr("#{i.project}") %>:
+	<% end %>
+    <%= link_to_version i%>
+  </span>
+  <% end %>
+<% end %>
+</td>
+<%= '</tr><tr>' if day.cwday==calendar.last_wday and day!=calendar.enddt %>
+<% day = day + 1
+end %>
+</tr>
+</tbody>
+</table>
