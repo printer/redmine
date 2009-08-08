@@ -6,3 +6,4 @@ db/schema.rb
 files/*
 public/plugin_assets
 tmp/*
+vendor/plugins/redmine_taska/db/migrate/20090806000000_create_defaults.rb
