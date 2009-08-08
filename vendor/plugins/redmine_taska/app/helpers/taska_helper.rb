@@ -3,7 +3,7 @@ module TaskaHelper
     result = ""
     
     project.split.each do |word|
-      result += word[0,1]
+      result += word.first
     end
     
     result

@@ -36,6 +36,8 @@
 #elements-spacer {height:15px; width:100%;}
 #calendar-note {margin-bottom: 5px; font-weight: bold; font-size: 11px;}
 
+#projects_list a {display:block; padding: 2px 5px;}
+
 table.taska_cal {border-collapse: collapse; width: 100%; margin: 0px 0 6px 0;border: 1px solid rgb(233, 233, 233);}
 table.taska_cal th {background: rgb(233, 233, 233); color: rgb(102, 102, 102); padding: 4px; font-size:10px;}
 table.taska_cal td {vertical-align: top; font-size: 10px; line-height: 1.5em;}
@@ -47,7 +49,7 @@ table.taska_cal .filled {border: 1px solid black;}
 table.taska_cal .empty {background: rgb(240, 240, 240); border-left: 1px solid rgb(233, 233, 233); border-top: 1px solid border-left: 1px solid rgb(233, 233, 233);}
 table.taska_cal .empty p.day-num {color: rgb(204, 204, 204);}
 
-table.activity { width:100%;}
+table.activity { width:100%; margin-bottom: 10px;}
 table.activity th {background: rgb(233, 233, 233); padding:5px; text-align: left;}
 table.activity th a {color:rgb(102, 102, 102);}
 

@@ -8,7 +8,7 @@ class WelcomeController < ApplicationController
   menu_item :state
   
   def index_with_taska
-    @projects = Project.all.sort
+    @projects = Project.find(:all, :conditions => Project.visible_by(User.current), :order => "name")	
     
     @calendar = Redmine::Helpers::Calendar.new(Date.today, current_language, :week)
     @calendar.expand 7.days

@@ -1,7 +1,7 @@
 module Taska
   module Changeset
     def event_title
-      "##{revision}" + (short_comments.blank? ? '' : (', ' + short_comments))
+      "##{repository.scm_name == 'Git' ? revision.first(5) : revision}" + (short_comments.blank? ? '' : (', ' + short_comments))
     end
     
     def activity_action
