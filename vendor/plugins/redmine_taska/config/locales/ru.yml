@@ -25,12 +25,20 @@ ru:
     label_activity_changeset: Коммит
     label_activity_attachment: Файл
     label_activity_version: Майлстоун
+    label_activity_message: Сообщение
     
     label_activity_issue-note: Комментарий
     
-    label_news: Сообщения
-    label_news_new: Добавить сообщение
-    label_news_plural: Сообщения
-    label_news_latest: Последние сообщения
-    label_news_view_all: Показать все сообщения
-    label_news_added: Сообщение добавлено
+    # label_news: Сообщения
+    # label_news_new: Добавить сообщение
+    # label_news_plural: Сообщения
+    # label_news_latest: Последние сообщения
+    # label_news_view_all: Показать все сообщения
+    # label_news_added: Сообщение добавлено
+    
+    label_roadmap: Майлстоуны
+    label_version: Майлстоун
+    label_version_new: Новый майлстоун
+    label_version_plural: Майлстоуны
+    field_fixed_version: Майлстоун
+    field_version: Майлстоун

@@ -1,3 +1,6 @@
+.contextual { color: #AAA; }
+.icon-add { background:transparent; padding:0px; }
+
 #additional-main-menu {position: absolute;  bottom: 0px;  right:0px;}
 #additional-main-menu ul {margin: 0;  padding: 0;}
 #additional-main-menu li {
@@ -67,3 +70,4 @@ table.activity tr.event td.date {border-left: 1px solid rgb(239, 239, 239); bord
 .activity_attachment{color:white; background-color:rgb(122, 74, 119)}
 .activity_changeset{color:white; background-color:#666;}
 .activity_version{color:white; background-color:rgb(95, 110, 67);}
+.activity_message{border: 1px solid black;}

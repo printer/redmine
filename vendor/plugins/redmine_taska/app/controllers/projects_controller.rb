@@ -3,8 +3,15 @@ require_dependency 'projects_controller'
 class ProjectsController < ApplicationController
   unloadable
   
-#  helper :issues, :projects 
-#  menu_item :state
+  menu_item :roadmap, :only => :add_version
+  
+  def add_version_with_taska
+  	@version = @project.versions.build(params[:version])
+  	if request.post? and @version.save
+  	  flash[:notice] = l(:notice_successful_create)
+      redirect_to :controller => 'projects', :action => 'roadmap', :id => @project
+  	end
+  end
   
   def show_with_taska
     if params[:jump]
@@ -31,8 +38,9 @@ class ProjectsController < ApplicationController
                                     :conditions => ["(effective_date BETWEEN ? AND ?) AND project_id = ?", @calendar.startdt, @calendar.enddt, @project])
                                     
     @activity = Redmine::Activity::Fetcher.new(User.current, :project => @project)
-    @events   = @activity.events(nil, nil, :limit => 5).group_by{|e| e.activity_updated_at.to_date}
+    @events   = @activity.events(nil, nil, :limit => 50).group_by{|e| e.activity_updated_at.to_date}
   end
   
+  alias_method_chain :add_version, :taska
   alias_method_chain :show, :taska
 end

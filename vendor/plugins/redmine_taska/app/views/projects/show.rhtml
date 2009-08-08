@@ -1,3 +1,17 @@
+<div class="contextual">
+<% if authorize_for('issues', 'new') %>
+<%= link_to l(:label_issue_new), {:controller => 'issues', :action => 'new', :project_id => @project} %>
+<% end %>
+<% if authorize_for('projects', 'add_version') %>
+|
+<%= link_to l(:label_version_new), {:controller => 'projects', :action => 'add_version', :id => @project} %>
+<% end %>
+<% if authorize_for('documents', 'new') %>
+|
+<%= link_to l(:label_document_new), {:controller => 'documents', :action => 'new', :project_id => @project} %>
+<% end %>
+</div>
+
 <h2><%=l(:label_overview)%></h2> 
 	
 <% if @calendar.events.any? %>

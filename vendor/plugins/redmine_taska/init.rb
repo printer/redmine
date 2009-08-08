@@ -55,6 +55,11 @@ end
 
 Redmine::MenuManager.map :project_menu do |menu|
   menu.delete :settings
+  menu.delete :activity
+  menu.delete :new_issue
+  menu.delete :roadmap
+  
+  menu.push :roadmap, { :controller => 'projects', :action => 'roadmap' }, :after => :issues
 end
 
 Redmine::MenuManager.map :account_menu do |menu|
