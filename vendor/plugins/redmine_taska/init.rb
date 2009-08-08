@@ -1,15 +1,25 @@
 require 'redmine'
 require 'dispatcher'
 
-require 'patches/calendar'
-require 'patches/i18n'
+require 'taska/redmine/helpers/calendar'
+require 'taska/redmine/i18n'
+require 'taska/acts_as_activity_provider'
+require 'taska/redmine/activity'
+require 'taska/redmine/activity/fetcher'
 
-require 'taska_document'
-require 'taska_issue'
+ActionView::Base.send(:include, AdditionalMenuHelper)
+ActionView::Base.send(:include, TaskaHelper)
 
 Dispatcher.to_prepare do
-  Issue.send(:include, TaskaIssue)
-  Document.send(:include, TaskaDocument)
+  Redmine::Activity::Fetcher.send(:include, Redmine::Activity::FetcherPatch)
+  
+  Issue.send(:include, Taska::Issue)
+  Journal.send(:include, Taska::Journal)
+  Document.send(:include, Taska::Document)
+  WikiContent.send(:include, Taska::WikiContent)
+  Attachment.send(:include, Taska::Attachment)
+  Changeset.send(:include, Taska::Changeset)
+  Version.send(:include, Taska::Version)
 end
 
 Redmine::Plugin.register :redmine_taska do
@@ -19,8 +29,22 @@ Redmine::Plugin.register :redmine_taska do
   version '0.0.1'
 end
 
-ActionView::Base.send(:include, AdditionalMenuHelper)
-ActionView::Base.send(:include, TaskaHelper)
+Redmine::Activity.clear
+
+Redmine::Activity.map do |activity|
+  activity.register :issues, :class_name => %w(Issue Journal)
+  activity.register :changesets
+  activity.register :news
+  activity.register :documents, :class_name => %w(Document Attachment)
+  activity.register :files, :class_name => 'Attachment'
+  activity.register :wiki_edits, :class_name => 'WikiContent'
+  activity.register :versions
+  activity.register :messages, :default => false
+end
+
+Redmine::AccessControl.map do |map|
+  map.permission :view_versions, {}, :public => true
+end
 
 Redmine::MenuManager.map :top_menu do |menu|
   menu.delete :projects

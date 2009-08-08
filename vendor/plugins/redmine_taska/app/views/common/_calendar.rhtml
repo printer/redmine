@@ -24,10 +24,7 @@ while day <= calendar.enddt %>
   <% unless @project && @project == i.project %>
     <%= project_abbr("#{i.project}") %>:
   <% end %>
-  <% unless milestones %>
-  <%= link_to_issue i %>,
-  <% end %>
-  <%= link_to h(truncate(i.subject, :length => 30)), {:controller => "issues", :action => "show", :id => i} %>
+  #<%= i.id %>, <%= link_to h(truncate(i.subject, :length => 30)), {:controller => "issues", :action => "show", :id => i} %>
   <% unless milestones %>
   <span class="tip"><%= render_issue_tooltip i %></span>
   <% end %>

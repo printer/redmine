@@ -66,7 +66,7 @@ module Redmine
       end
       
       # Returns an array of events for the given date range
-      def events(from = nil, to = nil, options={})
+      def events(from = nil, to = nil, options={})        
         e = []
         @options[:limit] = options[:limit]
         

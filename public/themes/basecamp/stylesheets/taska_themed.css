@@ -1,0 +1,17 @@
+#content { padding:0px; width: 70%; }
+#content-data { padding-left: 23px; padding-right: 28px; }
+#content h2 { margin-top: 0px; margin-left: -23px; margin-right: -28px;}
+#sidebar { width:30%; padding: 0px;}
+#sidebar-data { padding-left: 10px; }
+
+#additional-main-menu { margin: 0 30px; }
+#additional-main-menu li a { background-color: #666; font-weight: normal; padding:4px 8px 6px; }
+#additional-main-menu li a:hover { background-color: #999; text-decoration: none; }
+#additional-main-menu li a.selected, #additional-main-menu li a.selected:hover { background-color:#EEEEEE; color: #111; font-weight:bold; }
+
+#top-right-menu span a {color: #AAA;}
+#top-right-menu li a { color: #999; font-weight: normal; padding-left: 5px; }
+#top-right-menu li a:hover { color: #fff; text-decoration: none; }
+#top-right-menu .pipe {color: #999; padding-left: 5px; padding-right: 5px; }
+
+#header h1 a { padding-left: 10px; font-size: 12px; color: #999; }

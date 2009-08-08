@@ -6,3 +6,31 @@ ru:
     label_issues_calendar: Календарь
     label_back_home: К списку проектов
     label_due_milestones: Майлстоуны на 2 недели
+    
+    label_activity_anyone: Кто угодно
+    
+    label_activity_created: Создал
+    label_activity_posted: Разместил
+    label_activity_closed: Закрыл
+    label_activity_updated: Обновил
+    label_activity_assigned: "Назначена на:"
+    label_activity_uploaded: Загрузил
+    
+    label_activity_status: Статус
+    
+    label_activity_news: Сообщение
+    label_activity_issue: Задача
+    label_activity_document: Документ
+    label_activity_wiki-page: Wiki
+    label_activity_changeset: Коммит
+    label_activity_attachment: Файл
+    label_activity_version: Майлстоун
+    
+    label_activity_issue-note: Комментарий
+    
+    label_news: Сообщения
+    label_news_new: Добавить сообщение
+    label_news_plural: Сообщения
+    label_news_latest: Последние сообщения
+    label_news_view_all: Показать все сообщения
+    label_news_added: Сообщение добавлено

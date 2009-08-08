@@ -1,11 +1,3 @@
-/* Redmine theme */
-#content { padding:0px; width: 70%; }
-#content-data { padding-left: 23px; padding-right: 28px; }
-#content h2 { margin-top: 0px; margin-left: -23px; margin-right: -28px;}
-#sidebar { width:30%; padding: 0px;}
-#sidebar-data { padding-left: 10px; }
-/* --- */
-
 #additional-main-menu {position: absolute;  bottom: 0px;  right:0px;}
 #additional-main-menu ul {margin: 0;  padding: 0;}
 #additional-main-menu li {
@@ -26,13 +18,6 @@
 #additional-main-menu li a:hover {background:#759FCF; color:#fff;}
 #additional-main-menu li a.selected, #main-menu li a.selected:hover {background:#fff; color:#555;}
 
-/* Redmine theme */
-#additional-main-menu { margin: 0 30px; }
-#additional-main-menu li a { background-color: #666; font-weight: normal; padding:4px 8px 6px; }
-#additional-main-menu li a:hover { background: #999; text-decoration: none; }
-#additional-main-menu li a.selected, #additional-main-menu li a.selected:hover { background-color:#EEEEEE; color: #111; font-weight:bold; }
-/* --- */
-
 #top-right-menu {float:right; font-size: 0.8em; margin-right: 10px;}
 #top-right-menu span {
   margin: 0;
@@ -40,16 +25,10 @@
   white-space:nowrap;
 }
 #top-right-menu a {color: #fff;}
-#top-right-menu span a {color: #AAA;}
-#top-right-menu .pipe {color: #999; padding-left: 5px; padding-right: 5px; }
+#top-right-menu .pipe {color: #CCC; padding-left: 5px; padding-right: 5px; }
 #loggedas { font-weight: bold; font-size: 0.8em; float: right; color: #fff; }
 
-#header h1 a { padding-left: 10px; font-size: 12px; color: #999; }
-
-/* Redmine theme */
-#top-right-menu li a { color: #999; font-weight: normal; padding-left: 5px; }
-#top-right-menu li a:hover { color: #fff; text-decoration: none; }
-/* --- */
+#header h1 a { padding-left: 10px; font-size: 12px; color: #EEEEFF; }
 
 #elements-spacer {height:15px; width:100%;}
 #calendar-note {margin-bottom: 5px; font-weight: bold; font-size: 11px;}
@@ -69,5 +48,22 @@ table.activity { width:100%;}
 table.activity th {background: rgb(233, 233, 233); padding:5px; text-align: left;}
 table.activity th a {color:rgb(102, 102, 102);}
 
+table.activity tr.event {font-size: 10px; color: rgb(34, 34, 34);}
+table.activity tr.event td.type {border-bottom: 1px solid rgb(239, 239, 239); padding: 3px; width: 1%}
+table.activity tr.event td.type div {padding: 3px; 4px; text-align:right; min-width: 60px;}
+table.activity tr.event td.subject {border-bottom: 1px solid rgb(239, 239, 239);}
+table.activity tr.event td.author {border-bottom: 1px solid rgb(239, 239, 239); padding-right: 5px;}
+table.activity tr.event td.author span {color:gray}
+table.activity tr.event td.date {border-left: 1px solid rgb(239, 239, 239); border-bottom: 1px solid rgb(239, 239, 239); width:1%; padding-left: 5px;}
+
+.activity_closed, .activity_closed a {text-decoration:line-through;}
+
 .activity_document {color: white; background-color:rgb(51, 78, 125);}
+.activity_news {color: white; background-color:rgb(51, 78, 125);}
 .activity_issue{color:white; background-color:rgb(200, 120, 0);}
+.activity_wiki{color:white; background-color:rgb(36, 168, 158);}
+.activity_issue-note{color: white; background-color:rgb(100, 146, 172);}
+.activity_wiki-page{color:white; background-color:rgb(36, 168, 158);}
+.activity_attachment{color:white; background-color:rgb(122, 74, 119)}
+.activity_changeset{color:white; background-color:#666;}
+.activity_version{color:white; background-color:rgb(95, 110, 67);}

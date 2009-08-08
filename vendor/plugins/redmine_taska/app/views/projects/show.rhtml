@@ -1,0 +1,61 @@
+<h2><%=l(:label_overview)%></h2> 
+	
+<% if @calendar.events.any? %>
+<div id="calendar-note"><%= l(:label_due_milestones) %></div>
+<%= render :partial => 'common/calendar', :locals => {:calendar => @calendar, :milestones => true} %>
+<div id="elements-spacer"></div>
+<% end %>
+
+<% @events.each do |date, es| %>
+<table class="activity">
+	<tr>
+		<th colspan="10"><%= format_activity_day(date) %></th>
+	</tr>
+	<% es.each do |e| %>
+	<tr class="event">
+		<td class="type">
+			<div class="activity_<%= e.event_type %>"><%= l("label_activity_#{e.event_type}".to_sym) %></div>
+		</td>
+		<td class="subject <% if e.activity_action == 'closed' %> activity_closed"<% end %>"><%= link_to e.event_title, e.event_url %></td>
+		<td align="right" class="author">
+		  <span><%= l("label_activity_#{e.activity_action}".to_sym) %></span>&nbsp;&nbsp;<%= e.activity_author.nil? ? l(:label_activity_anyone) : e.activity_author.name %>
+		</td>
+		<td class="date"><%= format_activity_day((e.activity_updated_at).to_date) %></td>
+	</tr>
+	<% end %>
+</table>
+<% end %>
+
+<% content_for :sidebar do %>
+    <% planning_links = []
+      planning_links << link_to_if_authorized(l(:label_calendar), :controller => 'issues', :action => 'calendar', :project_id => @project)
+      planning_links << link_to_if_authorized(l(:label_gantt), :controller => 'issues', :action => 'gantt', :project_id => @project)
+      planning_links.compact!
+      unless planning_links.empty? %>
+    <h3><%= l(:label_planning) %></h3>
+    <p><%= planning_links.join(' | ') %></p>
+    <% end %>
+    
+    <% if @total_hours && User.current.allowed_to?(:view_time_entries, @project) %>
+    <h3><%= l(:label_spent_time) %></h3>
+    <p><span class="icon icon-time"><%= l_hours(@total_hours) %></span></p>
+    <p><%= link_to(l(:label_details), {:controller => 'timelog', :action => 'details', :project_id => @project}) %> |
+    <%= link_to(l(:label_report), {:controller => 'timelog', :action => 'report', :project_id => @project}) %></p>
+    <% end %>
+
+	<% if @users_by_role.any? %>
+		<h3><%=l(:label_member_plural)%></h3>	
+		<% @users_by_role.keys.sort.each do |role| %>
+		<p>
+			<%= @users_by_role[role].sort.collect{|u| link_to_user u}.join(", ") %><br />
+			<span style="color:gray; font-size: 10px;"><%=h role %></span>
+		</p>
+		<% end %>
+	<% end %>
+<% end %>
+
+<% content_for :header_tags do %>
+<%= auto_discovery_link_tag(:atom, {:action => 'activity', :id => @project, :format => 'atom', :key => User.current.rss_key}) %>
+<% end %>
+
+<% html_title(l(:label_overview)) -%>

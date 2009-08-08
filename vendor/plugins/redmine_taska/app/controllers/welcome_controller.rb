@@ -17,12 +17,13 @@ class WelcomeController < ApplicationController
                                     :conditions => ["effective_date BETWEEN ? AND ?", @calendar.startdt, @calendar.enddt])
 
     @events = {}
-
+    
     @projects.each do |p|
       @activity  = Redmine::Activity::Fetcher.new(User.current, :project => p)
       @events[p] ||= [] 
       @events[p] += @activity.events(nil, nil, :limit => 5)
     end
+    
   end
   
   alias_method_chain :index, :taska

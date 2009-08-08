@@ -2,3 +2,7 @@ Capfile
 config/deploy.rb
 log/*
 db/*.sqlite3
+db/schema.rb
+files/*
+public/plugin_assets
+tmp/*

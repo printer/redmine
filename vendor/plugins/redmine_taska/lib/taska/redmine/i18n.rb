@@ -1,3 +1,5 @@
+require 'redmine/i18n'
+
 module Redmine
   module I18n
     def abbr_day_name(day)
@@ -5,5 +7,3 @@ module Redmine
     end
   end
 end
-
-require 'redmine/i18n'

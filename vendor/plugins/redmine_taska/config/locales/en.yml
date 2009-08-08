@@ -6,3 +6,31 @@ en:
     label_issues_calendar: Calendar
     label_back_home: Back to projects
     label_due_milestones: Due in 2 weeks
+    
+    label_activity_anyone: Anyone
+    
+    label_activity_created: Created by
+    label_activity_posted: Posted by
+    label_activity_closed: Closed by
+    label_activity_updated: Updated by
+    label_activity_assigned: Assigned to
+    label_activity_uploaded: Uploaded by
+    
+    label_activity_status: Status
+    
+    label_activity_news: Message
+    label_activity_issue: Issue
+    label_activity_document: Document
+    label_activity_wiki-page: Wiki
+    label_activity_changeset: Changeset
+    label_activity_attachment: File
+    label_activity_version: Milestone
+    
+    label_activity_issue-note: Comment
+    
+    label_news: Messages
+    label_news_new: Add message
+    label_news_plural: Messages
+    label_news_latest: Latest messages
+    label_news_view_all: View all messages
+    label_news_added: Message added
