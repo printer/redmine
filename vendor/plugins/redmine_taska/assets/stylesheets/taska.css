@@ -57,7 +57,7 @@ table.activity tr.event {font-size: 10px; color: rgb(34, 34, 34);}
 table.activity tr.event td.type {border-bottom: 1px solid rgb(239, 239, 239); padding: 3px; width: 1%}
 table.activity tr.event td.type div {padding: 3px; 4px; text-align:right; min-width: 60px;}
 table.activity tr.event td.subject {border-bottom: 1px solid rgb(239, 239, 239);}
-table.activity tr.event td.author {border-bottom: 1px solid rgb(239, 239, 239); padding-right: 5px;}
+table.activity tr.event td.author {white-space:nowrap; padding-left:15px; border-bottom: 1px solid rgb(239, 239, 239); padding-right: 5px;}
 table.activity tr.event td.author span {color:gray}
 table.activity tr.event td.date {border-left: 1px solid rgb(239, 239, 239); border-bottom: 1px solid rgb(239, 239, 239); width:1%; padding-left: 5px;}
 
