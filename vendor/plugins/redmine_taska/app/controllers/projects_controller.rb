@@ -41,6 +41,37 @@ class ProjectsController < ApplicationController
     @events   = @activity.events(nil, nil, :limit => 50).group_by{|e| e.activity_updated_at.to_date}
   end
   
+  def list_files_with_taska
+    sort_init 'filename', 'asc'
+    sort_update 'filename' => "#{Attachment.table_name}.filename",
+                'created_on' => "#{Attachment.table_name}.created_on",
+                'size' => "#{Attachment.table_name}.filesize",
+                'downloads' => "#{Attachment.table_name}.downloads"
+    
+    @filter = params[:filter]
+
+    if @filter == 'documents'
+      conditions = {:project_id => @project.id, :container_type => 'Document'}
+    else
+      conditions = {:project_id => @project.id}
+      @filter = nil
+    end
+
+    @files = Attachment.find(:all, :conditions => conditions, :order => sort_clause)
+    @files = @files.group_by{|f| f.created_on.to_date}
+    
+    # sort_init 'filename', 'asc'
+    # sort_update 'filename' => "#{Attachment.table_name}.filename",
+    #             'created_on' => "#{Attachment.table_name}.created_on",
+    #             'size' => "#{Attachment.table_name}.filesize",
+    #             'downloads' => "#{Attachment.table_name}.downloads"
+    #             
+    # @containers = [ Project.find(@project.id, :include => :attachments, :order => sort_clause)]
+    # @containers += @project.versions.find(:all, :include => :attachments, :order => sort_clause).sort.reverse
+    render :layout => !request.xhr?
+  end
+  
   alias_method_chain :add_version, :taska
   alias_method_chain :show, :taska
+  alias_method_chain :list_files, :taska
 end

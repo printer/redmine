@@ -34,7 +34,9 @@ while day <= calendar.enddt %>
 	<% unless @project && @project == i.project %>
 	    <%= project_abbr("#{i.project}") %>:
 	<% end %>
-    <%= link_to_version i%>
+	<% if i.completed? %><s><% end %>
+	<%= link_to_version i %>
+	<% if i.completed? %></s><% end %>
   </span>
   <% end %>
 <% end %>

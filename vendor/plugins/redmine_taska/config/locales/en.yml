@@ -1,7 +1,9 @@
 en:
+    label_home_title: Latest activies
+    
     label_users: Users
-    label_summary: Summary
-    label_project_summary: Project Summary
+    label_state: Dashboard
+    label_project_state: Summary
     label_admin: Administration
     label_issues_calendar: Calendar
     label_back_home: Back to projects
@@ -42,3 +44,12 @@ en:
     label_version_plural: Milestones
     field_fixed_version: Milestone
     field_version: Milestone
+    
+    field_closed: Closed
+    
+    label_wiki_version: Version
+    
+    label_attachments_all: All
+    label_attachments_documents: Documents
+    
+    label_wiki_versions: Versions

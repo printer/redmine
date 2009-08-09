@@ -1,4 +1,6 @@
 ru:
+    label_home_title: Последняя активность
+    
     label_users: Пользователи
     label_state: Сводка
     label_project_state: Сводка
@@ -42,3 +44,12 @@ ru:
     label_version_plural: Майлстоуны
     field_fixed_version: Майлстоун
     field_version: Майлстоун
+    
+    field_closed: Закрыт
+
+    label_wiki_version: Версия
+    
+    label_attachments_all: Все
+    label_attachments_documents: Документы
+    
+    label_wiki_versions: Версии

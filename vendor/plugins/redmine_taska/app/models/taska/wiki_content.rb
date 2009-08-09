@@ -2,7 +2,7 @@ module Taska
   module WikiContent
     def self.included(base)
       base.class_eval do
-        acts_as_event :title => Proc.new {|o| "#{o.page.title} (#{l(:label_version)} #{o.version})"},
+        acts_as_event :title => Proc.new {|o| "#{o.page.title} (#{l(:label_wiki_version)} #{o.version})"},
                       :description => :comments,
                       :datetime => :updated_on,
                       :type => 'wiki-page',

@@ -1,3 +1,4 @@
+
 module Taska
   module Version
     def self.included(base)
@@ -12,7 +13,18 @@ module Taska
                                   :timestamp => "#{table_name}.updated_on",
                                   :author_key => 'activity_created_by_id',
                                   :find_options => {:include => :project}
+                                  
+        alias_method_chain :completed?, :taska
+        alias_method_chain :activity_action, :closed
       end
+    end
+    
+    def completed_with_taska?
+      closed == "1"
+    end
+    
+    def activity_action_with_closed
+      completed? ? 'closed' : (activity_created_at == activity_updated_at ? 'created' : 'updated')
     end
   end
 end

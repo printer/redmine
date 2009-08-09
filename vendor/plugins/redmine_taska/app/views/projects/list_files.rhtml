@@ -16,16 +16,13 @@
     <th></th>
   </tr></thead>
   <tbody>
-<% @containers.each do |container| %>	
-  <% next if container.attachments.empty? -%>
-  <% if container.is_a?(Version) -%>
-    <tr>
-	  <th colspan="6" align="left">
-  		<%= link_to(h(container), {:controller => 'versions', :action => 'show', :id => container}, :class => "icon icon-package") %>
-	  </th>
-    </tr>
-  <% end -%>
-  <% container.attachments.each do |file| %>		
+  <% @files.each do |date,list| %>	
+  <tr>
+    <th colspan="6" align="left">
+      <%= format_activity_day(date) %>
+    </th>
+  </tr>
+  <% list.each do |file| %>		
   <tr class="file <%= cycle("odd", "even") %>">
     <td class="filename"><%= link_to_attachment file, :download => true, :title => file.description %></td>
     <td class="created_on"><%= format_time(file.created_on) %></td>
@@ -42,5 +39,13 @@
 <% end %>
   </tbody>
 </table>
+
+<% content_for :sidebar do %>
+<h3><%= l(:field_category) %></h3>
+<% form_tag({}, :method => :get) do %>
+<label><%= radio_button_tag 'filter', '', (@filter.blank?), :onclick => 'this.form.submit();' %> <%= l(:label_attachments_all).classify %></label><br />
+<label><%= radio_button_tag 'filter', 'documents', (@filter == 'documents'), :onclick => 'this.form.submit();' %> <%= l(:label_attachments_documents) %></label>
+<% end %>
+<% end %>
 
 <% html_title(l(:label_attachment_plural)) -%>

@@ -17,8 +17,8 @@ class CreateActivities < ActiveRecord::Migration
     Changeset.update_all 'activity_updated_at = committed_on'
     Journal.update_all 'activity_updated_at = created_on'
     News.update_all 'activity_updated_at = created_on'
-    WikiContent.update_all 'activity_updated_at = created_on'
-    WikiContent::Version.update_all 'activity_updated_at = created_on'
+    WikiContent.update_all 'activity_updated_at = updated_on'
+    WikiContent::Version.update_all 'activity_updated_at = updated_on'
     Version.update_all 'activity_updated_at = created_on'
     Message.update_all 'activity_updated_at= created_on'
   end
