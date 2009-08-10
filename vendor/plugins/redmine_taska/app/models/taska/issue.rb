@@ -9,7 +9,7 @@ module Taska
     def create_journal_with_taska
       if @current_journal
         # attributes changes
-        (::Issue.column_names - %w(id description lock_version created_on updated_on activity_updated_at)).each {|c|
+        (::Issue.column_names - %w(id description lock_version created_on updated_on activity_updated_at activity_updated_by_id)).each {|c|
           @current_journal.details << JournalDetail.new(:property => 'attr',
                                                         :prop_key => c,
                                                         :old_value => @issue_before_change.send(c),
