@@ -1,5 +1,12 @@
 en:
+    label_by: by
+    
+    field_responsible: Responsible
+    
+    button_add_comment: Add comment
+    
     label_home_title: Latest activies
+    label_filter: Фильтр
     
     label_users: Users
     label_state: Dashboard
@@ -20,30 +27,22 @@ en:
     
     label_activity_status: Status
     
-    label_activity_news: Message
+    label_activity_news: News
     label_activity_issue: Issue
     label_activity_document: Document
     label_activity_wiki-page: Wiki
     label_activity_changeset: Changeset
     label_activity_attachment: File
     label_activity_version: Milestone
-    label_activity_message: Message
-    
+    label_activity_message: Forum
+    label_activity_comment: Comment
     label_activity_issue-note: Comment
     
-    # label_news: Messages
-    # label_news_new: Add message
-    # label_news_plural: Messages
-    # label_news_latest: Latest messages
-    # label_news_view_all: View all messages
-    # label_news_added: Message added
-    
     label_roadmap: Milestones
-    label_version: Milestone
-    label_version_new: New milestone
-    label_version_plural: Milestones
-    field_fixed_version: Milestone
-    field_version: Milestone
+    label_roadmap_no_issues: No tasks for milestone
+    label_milestone_new: New milestone
+    label_milestone_plural: Milestones
+    label_milestones_late: Late  by
     
     field_closed: Closed
     
@@ -53,3 +52,19 @@ en:
     label_attachments_documents: Documents
     
     label_wiki_versions: Versions
+    label_wiki_compare: Check two and
+    label_wiki_compare_button: Compare
+    
+    label_document_created: Posted by
+    label_post_first_comment: Post first comment
+    label_documents_back: « All messages
+    label_documents_category_any: Any
+    label_documents_all: All messages
+    label_documents_in: "Messages in '{{value}}'"
+    label_view_all_images: View all images at once
+    label_download_image: View full size
+    
+    label_document_message: Message
+    label_document_message_plural: Messages
+    label_document_message_new: New message
+    label_files_upload_new_version: Upload new version

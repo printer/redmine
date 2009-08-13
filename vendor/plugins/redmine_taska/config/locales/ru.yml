@@ -1,5 +1,27 @@
 ru:
+    date:
+        formats:
+            default: "%a, %d %B %Y"
+            long: "%a, %d %B %Y"
+            
+    label_x_comments:
+      zero: нет комментариев
+      one: 1 комментарий
+      few: "{{count}} комментария"
+      many: "{{count}} комментариев"
+      other: "{{count}} комментариев"
+      
+    label_by: автор
+    
+    field_responsible: Ответственный
+    
+    permission_comment_documents: Комментирует документы
+    permission_manage_comments: Управляет комментариями
+    
+    button_add_comment: Добавить комментарий
+    
     label_home_title: Последняя активность
+    label_filter: Фильтр
     
     label_users: Пользователи
     label_state: Сводка
@@ -7,7 +29,7 @@ ru:
     label_admin: Администрирование
     label_issues_calendar: Календарь
     label_back_home: К списку проектов
-    label_due_milestones: Майлстоуны на 2 недели
+    label_due_milestones: В текущие 2 недели
     
     label_activity_anyone: Кто угодно
     
@@ -20,30 +42,22 @@ ru:
     
     label_activity_status: Статус
     
-    label_activity_news: Сообщение
+    label_activity_news: Новость
     label_activity_issue: Задача
     label_activity_document: Документ
     label_activity_wiki-page: Wiki
     label_activity_changeset: Коммит
     label_activity_attachment: Файл
     label_activity_version: Майлстоун
-    label_activity_message: Сообщение
-    
+    label_activity_message: Форум
+    label_activity_comment: Комментарий
     label_activity_issue-note: Комментарий
     
-    # label_news: Сообщения
-    # label_news_new: Добавить сообщение
-    # label_news_plural: Сообщения
-    # label_news_latest: Последние сообщения
-    # label_news_view_all: Показать все сообщения
-    # label_news_added: Сообщение добавлено
-    
     label_roadmap: Майлстоуны
-    label_version: Майлстоун
-    label_version_new: Новый майлстоун
-    label_version_plural: Майлстоуны
-    field_fixed_version: Майлстоун
-    field_version: Майлстоун
+    label_roadmap_no_issues: Нет задач для данного майлстоуна
+    label_milestone_new: Новый майлстоун
+    label_milestone_plural: Майлстоуны
+    label_milestones_late: Опоздание на
     
     field_closed: Закрыт
 
@@ -53,3 +67,20 @@ ru:
     label_attachments_documents: Документы
     
     label_wiki_versions: Версии
+    label_wiki_compare: Выберите две и
+    label_wiki_compare_button: Сравните
+    
+    label_document_created: Разместил
+    label_post_first_comment: Написать первый комментарий
+    label_documents_back: « Все сообщения
+    label_documents_category_any: Любая
+    label_documents_all: Все сообщения
+    label_documents_in: "Сообщения в категории '{{value}}'"
+    label_view_all_images: Показать все картинки сразу
+    label_download_image: В полный размер
+    
+    label_document_message: Сообщение
+    label_document_message_plural: Сообщения
+    label_document_message_new: Новое сообщение
+    label_files_upload_new_version: Загрузить новую версию
+    label_new_version_of: "Загрузить новую версию файла {{value}}"

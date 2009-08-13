@@ -39,35 +39,37 @@ class ProjectsController < ApplicationController
                                     
     @activity = Redmine::Activity::Fetcher.new(User.current, :project => @project)
     @events   = @activity.events(nil, nil, :limit => 50).group_by{|e| e.activity_updated_at.to_date}
+    
+    @late = Version.find_late
   end
   
   def list_files_with_taska
-    sort_init 'filename', 'asc'
-    sort_update 'filename' => "#{Attachment.table_name}.filename",
-                'created_on' => "#{Attachment.table_name}.created_on",
-                'size' => "#{Attachment.table_name}.filesize",
-                'downloads' => "#{Attachment.table_name}.downloads"
-    
-    @filter = params[:filter]
+    @category = params[:category]
 
-    if @filter == 'documents'
-      conditions = {:project_id => @project.id, :container_type => 'Document'}
+    conditions = {:project_id => @project.id}
+
+    if @category == 'documents'
+      conditions.merge!({:container_type => 'Document'})
     else
-      conditions = {:project_id => @project.id}
-      @filter = nil
+      @category = nil
     end
 
-    @files = Attachment.find(:all, :conditions => conditions, :order => sort_clause)
-    @files = @files.group_by{|f| f.created_on.to_date}
+    @files    = Attachment.find(:all, :conditions => conditions, :order => 'created_on DESC')
+    @versions = @files.select{|f| !f.current_version.blank?}.group_by{|f| f.current_version}
     
-    # sort_init 'filename', 'asc'
-    # sort_update 'filename' => "#{Attachment.table_name}.filename",
-    #             'created_on' => "#{Attachment.table_name}.created_on",
-    #             'size' => "#{Attachment.table_name}.filesize",
-    #             'downloads' => "#{Attachment.table_name}.downloads"
-    #             
-    # @containers = [ Project.find(@project.id, :include => :attachments, :order => sort_clause)]
-    # @containers += @project.versions.find(:all, :include => :attachments, :order => sort_clause).sort.reverse
+    @files = @files.select{|f| f.current_version.blank?}
+    
+    @sort_by = params[:sort_by]
+    
+    if @sort_by == 'title'
+      @files = @files.sort_by(&:filename).group_by{|f| f.filename.first}
+    elsif @sort_by == 'size'
+      @files = @files.sort_by(&:filesize).group_by{|f| f.filesize > 1000000 ? '> 1 Mb' : '< 1 Mb'}
+    else
+      @files = @files.group_by{|f| f.created_on.to_date}
+      @sort_by = nil
+    end
+    
     render :layout => !request.xhr?
   end
   

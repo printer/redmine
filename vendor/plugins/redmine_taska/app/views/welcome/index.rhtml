@@ -1,8 +1,30 @@
 <h2><%= l(:label_home_title) %></h2>
 
-<% if @calendar.events.any? %>
-<div id="calendar-note"><%= l(:label_due_milestones) %></div>
-<%= render :partial => 'common/calendar', :locals => {:calendar => @calendar, :milestones => true} %>
+<% if @calendar.events.any? || @late.any? %>
+<table id="upcoming_milestones">
+	<tr>
+		<th class="title"><%= l(:label_milestone_plural) %></th>
+	</tr>
+	<tr>
+		<td>
+			<% if @late.any? %>
+				<ul>
+				<% @late.each do |l| %>
+			    <li>
+						<strong><%= l(:label_milestones_late) %> <%= I18n.t(:x_days, :count => (DateTime.now - l.effective_date).to_i, :scope => 'datetime.distance_in_words') %></strong>: 
+						<%= link_to_version l %> 
+						/<%= l.project.name %><%= ", #{l(:field_responsible)} #{l.responsible.name}" unless l.responsible.blank? %>/
+					</li>
+				<% end %>
+				</ul>
+			<% end %>
+			<% if @calendar.events.any? %>
+			<div id="calendar-note"><%= l(:label_due_milestones) %></div>
+			<%= render :partial => 'common/calendar', :locals => {:calendar => @calendar, :milestones => true} %>
+			<% end %>
+		</td>
+	</tr>
+</table>
 <div id="elements-spacer"></div>
 <% end %>
 

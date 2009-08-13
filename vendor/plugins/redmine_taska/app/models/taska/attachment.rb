@@ -1,3 +1,5 @@
+require 'ftools'
+
 module Taska
   module Attachment
     def self.included(base)
@@ -16,6 +18,18 @@ module Taska
       else
         self.project = container.project if container.respond_to?(:project)
       end
+    end
+    
+    def after_save
+      File.syscopy(diskfile, thumb) if image?
+    end
+    
+    def thumb_uri
+      "thumbs/#{id}.jpg"
+    end
+    
+    def thumb
+      "#{RAILS_ROOT}/public/images/" + thumb_uri
     end
      
     def activity_action

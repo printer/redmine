@@ -33,21 +33,45 @@
 
 #header h1 a { padding-left: 10px; font-size: 12px; color: #EEEEFF; }
 
-#elements-spacer {height:15px; width:100%;}
+#elements-spacer {height:20px; width:100%;}
 #calendar-note {margin-bottom: 5px; font-weight: bold; font-size: 11px;}
 
 #projects_list a {display:block; padding: 2px 5px;}
 
+#sidebar .categories a {display: block;
+line-height: 15px;
+margin: 0px 0px 3px 0px;
+padding: 4px;}
+#sidebar .categories span {padding: 4px;}
+#sidebar .categories .selected span {background: black; color: white;}
+#sidebar .categories a:hover.selected span {background-color:transparent;}
+
+a.admin {color: red;}
+h3.date { font-size: 9px; margin: 0px 0px 15px -23px; text-transform: uppercase; }
+h3.date span {font-weight: bold; color: rgb(102, 102, 102); padding: 2px 4px 2px 24px;}
+h1.title {font-size: 18px; color:black; padding:0px; margin:0px; font-weight: bold;}
+h1.title a {background: white; color: black; text-decoration: underline; padding: 0px;}
+div.subtitle {color: rgb(102, 102, 102); font-size: 12px; font-weight: normal; margin: 1px 0px 8px 0px;}
+span.pipe, span.label {color: rgb(153, 153, 153);}
+
 table.taska_cal {border-collapse: collapse; width: 100%; margin: 0px 0 6px 0;border: 1px solid rgb(233, 233, 233);}
 table.taska_cal th {background: rgb(233, 233, 233); color: rgb(102, 102, 102); padding: 4px; font-size:10px;}
 table.taska_cal td {vertical-align: top; font-size: 10px; line-height: 1.5em;}
-table.taska_cal td p.day-num {font-weight: bold;}
+table.taska_cal td p.day-num {font-weight: bold; font-size: 9px;}
 table.taska_cal td.odd p.day-num {color: #bbb;}
 table.taska_cal td.today {background:#ffffdd;}
 table.taska_cal td.today p.day-num {font-weight: bold;}
 table.taska_cal .filled {border: 1px solid black;}
 table.taska_cal .empty {background: rgb(240, 240, 240); border-left: 1px solid rgb(233, 233, 233); border-top: 1px solid border-left: 1px solid rgb(233, 233, 233);}
 table.taska_cal .empty p.day-num {color: rgb(204, 204, 204);}
+#upcoming_milestones .taska_cal {margin:0;}
+
+#upcoming_milestones {border: 1px solid rgb(204, 204, 204); width: 100%;}
+#upcoming_milestones th.title {background: rgb(233, 233, 233); border-bottom: 2px solid rgb(255, 255, 255); color: black; font-size: 13px; font-weight: bold; margin-bottom: 10px; padding: 5px; text-align: left}
+#upcoming_milestones td {padding: 3px 5px;}
+#upcoming_milestones ul {margin: 0px; padding: 0px; margin-bottom: 10px;}
+#upcoming_milestones li {list-style-type: none; font-size: 11px; line-height: 13px; padding: 3px 0px;}
+#upcoming_milestones li strong {color: rgb(204, 0, 0);}
 
 table.activity { width:100%; margin-bottom: 10px;}
 table.activity th {background: rgb(233, 233, 233); padding:5px; text-align: left;}
@@ -59,7 +83,7 @@ table.activity tr.event td.type div {padding: 3px; 4px; text-align:right; min-wi
 table.activity tr.event td.subject {border-bottom: 1px solid rgb(239, 239, 239);}
 table.activity tr.event td.author {white-space:nowrap; padding-left:15px; border-bottom: 1px solid rgb(239, 239, 239); padding-right: 5px;}
 table.activity tr.event td.author span {color:gray}
-table.activity tr.event td.date {border-left: 1px solid rgb(239, 239, 239); border-bottom: 1px solid rgb(239, 239, 239); width:1%; padding-left: 5px;}
+table.activity tr.event td.date {border-left: 1px solid rgb(239, 239, 239); border-bottom: 1px solid rgb(239, 239, 239); width:1%; padding-left: 5px; white-space:nowrap;}
 
 .activity_closed, .activity_closed a {text-decoration:line-through;}
 
@@ -68,8 +92,96 @@ table.activity tr.event td.date {border-left: 1px solid rgb(239, 239, 239); bord
 .activity_issue{color:white; background-color:rgb(200, 120, 0);}
 .activity_wiki{color:white; background-color:rgb(36, 168, 158);}
 .activity_issue-note{color: white; background-color:rgb(100, 146, 172);}
+.activity_comment{color: white; background-color:rgb(100, 146, 172);}
 .activity_wiki-page{color:white; background-color:rgb(36, 168, 158);}
 .activity_attachment{color:white; background-color:rgb(122, 74, 119)}
 .activity_changeset{color:white; background-color:#666;}
 .activity_version{color:white; background-color:rgb(95, 110, 67);}
 .activity_message{border: 1px solid black;}
+
+
+#wiki-versions input { font-size: 11px; }
+#wiki-versions { font-size:10px; border-collapse: collapse; }
+#wiki-versions tr.current td.id {border-left: 1px solid rgb(204, 204, 102);}
+#wiki-versions td.line {padding-bottom: 4px; padding-top: 4px;}
+#wiki-versions tr.current td {background-color: rgb(255, 255, 204); border-bottom: 1px solid rgb(204, 204, 102); border-top: 1px solid rgb(204, 204, 102);}
+#wiki-versions tr.current td.other {border-right: 1px solid rgb(204, 204, 102);}
+#wiki-versions td.go {padding-top:10px; font-size: 11px; line-height: 14px;}
+
+div.message
+{
+	margin: 0px 0px 10px 0px;
+	padding: 0px 0px 20px 0px;
+}
+div.message h3
+{
+	color: rgb(51, 51, 51);
+	font-size: 12px;
+	font-weight: normal;
+	line-height: 1.3em;
+	margin: 10px 0px 5px 0px;
+	padding: 0px;
+}
+div.message_header
+{
+	border-bottom: 1px solid rgb(221, 221, 221);
+	margin-bottom: 14px;
+	overflow: hidden;
+	padding-bottom: 5px;
+}
+
+div.message_header p {margin: 0; margin-top: 2px;}
+
+div.message_body {font-size: 14px;
+margin-bottom: 10px;}
+
+div.message_attachments {border-bottom: 1px solid rgb(221, 221, 221);
+margin-bottom: 10px;
+padding-bottom: 15px;}
+
+#comments .comment {border-bottom: 1px solid rgb(221, 221, 221);
+clear: left;
+color: rgb(51, 51, 51);
+padding: 10px 0px;}
+#comments .indented {margin:0px; margin-left: 60px;}
+.comment h3 {color: rgb(51, 51, 51);
+font-size: 12px;
+font-weight: normal;
+margin: 0px 0px 5px 0px;
+padding-left: 1px;
+line-height: 1.5em;}
+.comment h3 a {color: rgb(51, 51, 51);}
+#comments span.delete {float: right;}
+#comments .formatted_text_body {font-size: 12px;
+line-height: 1.4em;
+margin: 3px 0px 10px 0px;
+padding: 0px;}
+#comments .formatted_text_body p {margin: 0px;}
+
+.uploaded_images img {border: 1px solid rgb(204, 204, 204);
+margin: 0px 5px 5px 0px;
+padding: 1px;}
+.uploaded_images .all_at_once {margin-bottom: 10px;}
+.uploaded_images .all_at_once a{border-bottom: 1px solid rgb(221, 221, 221);
+color: rgb(136, 136, 136);
+padding-bottom: 0px;
+text-decoration: none;
+font-size: 10px;}
+.uploaded_images .all_at_once a:hover{background: rgb(102, 102, 102);
+border-color: rgb(102, 102, 102);
+color: white;}
+.uploaded_images p {padding: 0px; margin-top: 0px; margin-bottom: 20px; font-weight: bold; font-size: 10px;}
+
+.files {padding-left: 20px;}
+.file {clear: left; font-size: 14px; margin: 0px 0px 15px 2px; padding: 0px;}
+.file .file_icon {float: left; position: relative; width: 32px;}
+.file .file_info {margin-left: 40px;}
+.file h1 {padding: 1px; font-size: 14px; margin: 0px 0px 3px 0px; color: black; font-weight: bold;}
+.file h1 a {color: black;}
+.file h1 a:hover {background: white; color: black;}
+.file p {font-size: 12px; line-height: 1.4em; margin: 3px 0px 10px 0px; padding: 0px; font-size: 12px; margin-bottom: 3px; color:black;}
+.file p a {color:rgb(102, 102, 102); text-decoration:underline;}
+.file h3 {color: rgb(102, 102, 102); font-size: 11px; font-weight: normal; margin:0px; padding: 0px;}
+.file .version a {color:black; font-size: 12px;}
+
+.box p {padding-left: 120px;}

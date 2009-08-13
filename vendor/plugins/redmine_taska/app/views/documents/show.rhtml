@@ -1,0 +1,72 @@
+<div class="contextual">
+<%= link_to_if_authorized l(:button_edit), {:controller => 'documents', :action => 'edit', :id => @document}, :class => 'icon icon-edit', :accesskey => accesskey(:edit) %>
+<%= link_to_if_authorized l(:button_delete), {:controller => 'documents', :action => 'destroy', :id => @document}, :confirm => l(:text_are_you_sure), :method => :post, :class => 'icon icon-del' %>
+</div>
+
+<h2><%= link_to l(:label_documents_back), {:action => 'index'} %></h2>
+
+<div class="message_header">
+	<div style="float:right">
+	  <%= avatar @document.activity_created_by %>
+  </div>
+  <h1 class="title"><%= @document.title %></h1>
+  <p><span class="label"><%= l(:label_document_created) %>:</span> <%= @document.activity_created_by.name %></p>
+  <p><span class="label"><%= l(:label_date) %>:</span> <%= format_time(@document.created_on) %></p>
+  <p><span class="label"><%= l(:field_category) %>:</span> <%= link_to @document.category.name, :action => 'index', :project_id => @project, :category => @document.category.id %>
+</div>
+<div class="message_body">
+	<%= textilizable @document.description, :attachments => @document.attachments %>
+</div>
+
+<div class="message_attachments">
+<%= link_to_taska_attachments @document, :find_conditions => {:current_version => nil} %>
+</div>
+
+<div id="comments" style="margin-bottom:16px;">
+<% @comments.each do |comment| %>
+   <% next if comment.new_record? %>
+	<div class="comment">
+    <div class="float_liner">
+		  <% unless (avatar @document.activity_created_by).blank? %>
+			<div style="float:left; margin-right: 10px;">
+			  <%= avatar @document.activity_created_by %>
+		  </div>
+      <div class="indented">
+			<% end %>
+        <div class="comment_header">
+          <h3 <% if comment.author == User.current %>class="highlight"<% end %>>
+            
+              <span class="delete">
+						    <%= link_to_if_authorized image_tag('delete.png'), {:controller => 'documents', :action => 'destroy_comment', :id => @document.id, :comment_id => comment.id},
+						                                                       :confirm => l(:text_are_you_sure), :method => :post, :title => l(:button_delete) %>
+              </span>
+            
+            <a href="#<%= comment.id %>" class="permalink" name="comment-<%= comment.id %>">
+              <strong><%= comment.author.name %></strong>
+              <%= format_time(comment.created_on) %>
+            </a>
+            
+          </h3>
+        </div>
+        <div class="formatted_text_body">
+          <%= textilizable(comment.comments) %>
+        </div>
+ 		  <% unless (avatar @document.activity_created_by).blank? %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+<% end if @comments.any? %>
+</div>
+
+<% if authorize_for 'documents', 'add_comment' %>
+<% form_tag({:action => 'add_comment', :id => @document}, :id => "add_comment_form") do %>
+<div class="box">
+    <%= text_area 'comment', 'comments', :cols => 40, :rows => 10, :class => 'wiki-edit' %>
+    <%#= wikitoolbar_for 'comment_comments' %>
+</div>
+<p><%= submit_tag l(:button_add_comment) %></p>
+<% end %>
+<% end %>
+
+<% html_title @document.title -%>

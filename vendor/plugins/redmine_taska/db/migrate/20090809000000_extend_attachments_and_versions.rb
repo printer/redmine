@@ -3,10 +3,10 @@ class ExtendAttachmentsAndVersions < ActiveRecord::Migration
     add_column :attachments, :project_id, :integer
     
     Attachment.all.each do |a|
-      if container.is_a?(Project)
-        a.update_attributes(:project_id, container.id)
+      if a.container.is_a?(Project)
+        a.update_attributes(:project_id, a.container.id)
       else
-        a.update_attributes(:project_id, container.project.id) if a.container.respond_to?(:project)
+        a.update_attributes(:project_id, a.container.project.id) if a.container.respond_to?(:project)
       end
     end
     

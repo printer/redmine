@@ -24,6 +24,7 @@ class WelcomeController < ApplicationController
       @events[p] += @activity.events(nil, nil, :limit => 5)
     end
     
+    @late = Version.find_late
   end
   
   alias_method_chain :index, :taska

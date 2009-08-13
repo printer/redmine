@@ -6,46 +6,90 @@
 
 <% delete_allowed = User.current.allowed_to?(:manage_files, @project) %>
 
-<table class="list files">
-  <thead><tr>
-    <%= sort_header_tag('filename', :caption => l(:field_filename)) %>
-    <%= sort_header_tag('created_on', :caption => l(:label_date), :default_order => 'desc') %>
-    <%= sort_header_tag('size', :caption => l(:field_filesize), :default_order => 'desc') %>
-    <%= sort_header_tag('downloads', :caption => l(:label_downloads_abbr), :default_order => 'desc') %>
-    <th>MD5</th>
-    <th></th>
-  </tr></thead>
-  <tbody>
-  <% @files.each do |date,list| %>	
-  <tr>
-    <th colspan="6" align="left">
-      <%= format_activity_day(date) %>
-    </th>
-  </tr>
-  <% list.each do |file| %>		
-  <tr class="file <%= cycle("odd", "even") %>">
-    <td class="filename"><%= link_to_attachment file, :download => true, :title => file.description %></td>
-    <td class="created_on"><%= format_time(file.created_on) %></td>
-    <td class="filesize"><%= number_to_human_size(file.filesize) %></td>
-    <td class="downloads"><%= file.downloads %></td>
-    <td class="digest"><%= file.digest %></td>
-    <td align="center">
-    <%= link_to(image_tag('delete.png'), {:controller => 'attachments', :action => 'destroy', :id => file},
-																				 :confirm => l(:text_are_you_sure), :method => :post) if delete_allowed %>
-    </td>
-  </tr>		
-  <% end
-  reset_cycle %>
+<% @files.each do |date,list| %>	
+<h3 class="date"><span><%= @sort_by.blank? ? format_activity_day(date) : date %></span></h3>
+<div class="files">
+<% list.each do |f| %>
+<% next unless f.current_version.blank? %>
+<div id="file_<%= f.id %>">
+  <div class="file">
+    <div class="file_icon"><a href="/projects/3581304/file/33697127/test.rb" class="image"><img alt="Icon_generic_big" class="file_icon" height="32" src="http://asset1.projectpath.com/images/icons/icon_Generic_big.gif?1250120599" width="32"></a></div>
+
+    <div class="file_info">
+      <h1>
+				<%= link_to_attachment f %> 
+      </h1> 
+      <p>
+      	<% if f.container.is_a? Document %>
+				  <%= link_to f.container.title, {:controller => 'documents', :action => 'show', :id => f.container} %>
+				  &mdash;
+				  <%= truncate f.container.description, 60, '...' %>
+				<% end %>
+      </p>
+      <h3>
+				<%= "#{@versions[f.id].length + 1}) " unless @versions[f.id].blank? %>
+				<%= f.author.name %>, <%= number_to_human_size f.filesize %>
+				    <span class="pipe">-</span>
+				    <span>
+						<%= link_to l(:label_files_upload_new_version), {:controller => 'attachments', :action => 'new_version', :id => f} %>
+						<span class="pipe">|</span>
+					  <% if delete_allowed %>
+					    <%= link_to l(:button_delete), {:controller => 'attachments', :action => 'destroy', :id => f},
+					                                         :confirm => l(:text_are_you_sure),
+					                                         :method => :post,
+					                                         :class => 'admin',
+					                                         :title => l(:button_delete) %>
+					  <% end %>
+				   </span>
+				<% unless @versions[f.id].blank? %>
+					<% @versions[f.id].sort_by(&:id).reverse.each_with_index do |fv, i| %>
+					  <div>
+							<%= "#{@versions[f.id].length - i}) " %>
+						  <span class="version"><%= link_to_attachment fv %></span>
+							<%= fv.author.name %> /<%= format_date(fv.created_on) %>/ <%= number_to_human_size fv.filesize %>
+									<span class="pipe">|</span>
+							    <span>
+								  <% if delete_allowed %>
+								    <%= link_to l(:button_delete), {:controller => 'attachments', :action => 'destroy', :id => fv},
+								                                         :confirm => l(:text_are_you_sure),
+								                                         :method => :post,
+								                                         :class => 'admin',
+								                                         :title => l(:button_delete) %>
+								  <% end %>
+							   </span>
+						</di>
+					<% end %>
+				<% end %>
+      </h3>
+    </div>
+
+  </div>
+</div>
 <% end %>
-  </tbody>
-</table>
+</div>
+<% end %>
+
+
+
 
 <% content_for :sidebar do %>
+
+<div class="categories">
 <h3><%= l(:field_category) %></h3>
-<% form_tag({}, :method => :get) do %>
-<label><%= radio_button_tag 'filter', '', (@filter.blank?), :onclick => 'this.form.submit();' %> <%= l(:label_attachments_all).classify %></label><br />
-<label><%= radio_button_tag 'filter', 'documents', (@filter == 'documents'), :onclick => 'this.form.submit();' %> <%= l(:label_attachments_documents) %></label>
+<%= link_to "<span>#{l(:label_documents_category_any)}</span>", {:controller => 'projects', :action => 'list_files', :project_id => @project}, :class => @category.blank? ? 'selected' : nil %>
+<% %w(documents).each do |dc| %>
+	<%= link_to "<span>#{l('label_attachments_'+dc)}</span>", {:controller => 'projects', :action => 'list_files', :project_id => @project, :category => dc}, :class => @category == dc ? 'selected' : nil %></span>
 <% end %>
+</div>
+
+<h3><%= l(:label_sort_by, '') %></h3>
+<% form_tag({}, :method => :get) do %>
+<input type="hidden" name="category" value="<%= @category %>">
+<label><%= radio_button_tag 'sort_by', '', (@sort_by.blank?), :onclick => 'this.form.submit();' %> <%= l(:label_date) %></label><br />
+<label><%= radio_button_tag 'sort_by', 'title', (@sort_by == 'title'), :onclick => 'this.form.submit();' %> <%= l(:field_title) %></label><br />
+<label><%= radio_button_tag 'sort_by', 'size', (@sort_by == 'size'), :onclick => 'this.form.submit();' %> <%= l(:field_filesize) %></label>
+<% end %>
+
 <% end %>
 
 <% html_title(l(:label_attachment_plural)) -%>

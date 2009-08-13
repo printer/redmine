@@ -1,0 +1,57 @@
+<% options[:manage] ||= false %>
+<% unless options[:manage] %>
+<% content_for :lightbox do %>
+<%= javascript_include_tag 'effects', :plugin => 'redmine_taska' %>
+<%= javascript_include_tag 'builder', :plugin => 'redmine_taska' %>
+<%= javascript_include_tag 'scriptaculous.js?load=effects,builder', :plugin => 'redmine_taska' %>
+<%= javascript_include_tag 'lightbox', :plugin => 'redmine_taska' %>
+<% end %>
+
+<div class="attachments">
+<div class="uploaded_images">
+<% first = nil%>
+<% for attachment in attachments %>
+<% if attachment.image? %>
+	<% first ||= attachment %>
+  <%= link_to image_tag(attachment.thumb_uri, :width => 100, :height => 100), 
+			{:controller => 'attachments', :action => 'download', :id => attachment, :filename => attachment.filename}, 
+			:rel => 'lightbox', 
+			:title => "<div style='padding:5px;'>#{link_to l(:label_download_image), :controller => 'attachments', :action => 'download', :id => attachment, :filename => attachment.filename}</div>" %>
+<% end %>
+<% end %>
+<% unless first.blank? %>
+<div class="all_at_once">
+	<%= link_to l(:label_view_all_images), {:controller => 'attachments', :action => 'list_images', :id => first} %>
+</div>
+</div>
+<% end %>
+
+<% for attachment in attachments %>
+<% unless attachment.image? %>
+	<p><%= link_to_attachment attachment, :class => 'icon icon-attachment' -%>
+	<%= h(" - #{attachment.description}") unless attachment.description.blank? %>
+	  <span class="size">(<%= number_to_human_size attachment.filesize %>)</span>
+	  </p>
+<% end %>
+<% end %>
+</div>
+<% else %>
+<div class="attachments">
+<% for attachment in attachments %>
+<p><%= link_to_attachment attachment, :class => 'icon icon-attachment' -%>
+<%= h(" - #{attachment.description}") unless attachment.description.blank? %>
+  <span class="size">(<%= number_to_human_size attachment.filesize %>)</span>
+  <% if options[:deletable] %>
+    <%= link_to image_tag('delete.png'), {:controller => 'attachments', :action => 'destroy', :id => attachment},
+                                         :confirm => l(:text_are_you_sure),
+                                         :method => :post,
+                                         :class => 'delete',
+                                         :title => l(:button_delete) %>
+  <% end %>
+  <% if options[:author] %>
+    <span class="author"><%= attachment.author %>, <%= format_time(attachment.created_on) %></span>
+  <% end %>
+  </p>
+<% end %>
+</div>
+<% end %>

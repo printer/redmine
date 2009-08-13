@@ -1,0 +1,15 @@
+<h2><%=l(:label_document_message)%></h2>
+
+<% form_tag({:action => 'edit', :id => @document}, :class => "tabular", :multipart => true) do %>
+  <%= render :partial => 'form' %>
+
+	<div class="box">
+	<%= link_to_taska_attachments @document, :find_conditions => {:current_version => nil}, :manage => true %>
+	</div>
+
+	<div class="box">
+	<p><label><%=l(:label_attachment_plural)%></label><%= render :partial => 'attachments/form' %></p>
+	</div>
+
+  <%= submit_tag l(:button_save) %>
+<% end %>

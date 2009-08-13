@@ -1,8 +1,8 @@
-#content { padding:0px; width: 70%; }
+/*#content { padding:0px; width: 70%; }
 #content-data { padding-left: 23px; padding-right: 28px; }
 #content h2 { margin-top: 0px; margin-left: -23px; margin-right: -28px;}
 #sidebar { width:30%; padding: 0px;}
-#sidebar-data { padding-left: 10px; }
+#sidebar-data { padding-left: 10px; }*/
 
 #additional-main-menu { margin: 0 30px; }
 #additional-main-menu li a { background-color: #666; font-weight: normal; padding:4px 8px 6px; }
@@ -17,3 +17,5 @@
 #header h1 a { padding-left: 10px; font-size: 12px; color: #999; }
 
 .contextual { color: #AAA; margin-top: 9px; }
+
+h3.date span {border-bottom: 1px solid rgb(204, 204, 204);}

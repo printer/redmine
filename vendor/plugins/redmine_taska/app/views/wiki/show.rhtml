@@ -13,20 +13,6 @@
 
 <%= breadcrumb(@page.ancestors.reverse.collect {|parent| link_to h(parent.pretty_title), {:page => parent.title}}) %>
 
-<% if @content.version != @page.content.version %>
-    <p>    
-    <%= link_to(('&#171; ' + l(:label_previous)), :action => 'index', :page => @page.title, :version => (@content.version - 1)) + " - " if @content.version > 1 %>
-    <%= "#{l(:label_version)} #{@content.version}/#{@page.content.version}" %>
-    <%= '(' + link_to('diff', :controller => 'wiki', :action => 'diff', :page => @page.title, :version => @content.version) + ')' if @content.version > 1 %> - 
-    <%= link_to((l(:label_next) + ' &#187;'), :action => 'index', :page => @page.title, :version => (@content.version + 1)) + " - " if @content.version < @page.content.version %>
-    <%= link_to(l(:label_current_version), :action => 'index', :page => @page.title) %>
-    <br />
-    <em><%= @content.author ? @content.author.name : "anonyme" %>, <%= format_time(@content.updated_on) %> </em><br />
-    <%=h @content.comments %>
-    </p>
-    <hr />
-<% end %>
-
 <%= render(:partial => "wiki/content", :locals => {:content => @content}) %>
 
 <%= link_to_attachments @page %>
@@ -54,23 +40,51 @@
   <%= stylesheet_link_tag 'scm' %>
 <% end %>
 
+<script type="text/javascript">
+  check = function(s) 
+	{
+		data = $$("#wiki-versions input:checked")
+		
+    if ( data.length > 2 )
+	  {
+			data.each (function(v) { if (s != v) { v.checked = false } })
+		}
+		
+		if ( data.length == 2 )
+		{
+			$('wiki-versions-go').enable()
+		}
+		else
+		{
+			$('wiki-versions-go').disable()
+		}
+  }
+</script>
+
 <% content_for :sidebar do %>
   <%= render :partial => 'sidebar' %>
 
 	<h3><%= l(:label_wiki_versions) %></h3>
-  <table>
+	<% form_tag({:id => @project.identifier, :page => @page.title, :action => "diff"}, :method => :get) do %>
+  <table id="wiki-versions">
 	<% show_diff = @versions.size > 1 %>
 	<% line_num = 1 %>
 	<% @versions.each do |ver| %>
-	<tr>
-	    <td class="id"><%= link_to ver.version, :action => 'index', :page => @page.title, :version => ver.version %></td>
-	    <td class="checkbox"><%= check_box_tag('version[]', ver.version)%>
-	    <td align="center"><%= format_short_time(ver.updated_on) %></td>
-	    <td><em><%= ver.author ? ver.author.name : "anonyme" %></em></td>
+	<tr<% if @content.version == ver.version %> class="current"<% end %>>
+	    <td class="line id"><%= ver.version %></td>
+	    <td class="line checkbox"><%= check_box_tag('version[]', ver.version, false, :onclick => 'check(this)')%></td>
+	    <td class="line other"><%= link_to format_activity_day(ver.updated_on.to_date), :action => 'index', :page => @page.title, :version => ver.version %> <%= ver.author ? ver.author.name : "anonyme" %></td>
 	</tr>
 	<% line_num += 1 %>
 	<% end %>
+	<tr>
+		<td colspan="3" class="go">
+			<%= l(:label_wiki_compare) %>
+			<input id="wiki-versions-go" type="submit" value="<%= l(:label_wiki_compare_button) %>" disabled="disabled">
+		</td>
+	</tr>
 	</table>
+	<% end %>
 <% end %>
 
 <% html_title @page.pretty_title %>
