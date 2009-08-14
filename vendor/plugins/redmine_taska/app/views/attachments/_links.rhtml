@@ -1,11 +1,15 @@
 <% options[:manage] ||= false %>
+
 <% unless options[:manage] %>
+
+<% @lightbox ||= false %>
 <% content_for :lightbox do %>
 <%= javascript_include_tag 'effects', :plugin => 'redmine_taska' %>
 <%= javascript_include_tag 'builder', :plugin => 'redmine_taska' %>
 <%= javascript_include_tag 'scriptaculous.js?load=effects,builder', :plugin => 'redmine_taska' %>
 <%= javascript_include_tag 'lightbox', :plugin => 'redmine_taska' %>
-<% end %>
+<% @lightbox = true %>
+<% end unless @lightbox %>
 
 <div class="attachments">
 <div class="uploaded_images">
@@ -23,8 +27,8 @@
 <div class="all_at_once">
 	<%= link_to l(:label_view_all_images), {:controller => 'attachments', :action => 'list_images', :id => first} %>
 </div>
-</div>
 <% end %>
+</div>
 
 <% for attachment in attachments %>
 <% unless attachment.image? %>
@@ -35,7 +39,9 @@
 <% end %>
 <% end %>
 </div>
+
 <% else %>
+
 <div class="attachments">
 <% for attachment in attachments %>
 <p><%= link_to_attachment attachment, :class => 'icon icon-attachment' -%>
@@ -54,4 +60,5 @@
   </p>
 <% end %>
 </div>
+
 <% end %>

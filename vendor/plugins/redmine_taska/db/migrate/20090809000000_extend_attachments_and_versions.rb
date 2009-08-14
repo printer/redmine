@@ -4,9 +4,9 @@ class ExtendAttachmentsAndVersions < ActiveRecord::Migration
     
     Attachment.all.each do |a|
       if a.container.is_a?(Project)
-        a.update_attributes(:project_id, a.container.id)
+        a.update_attribute(:project_id, a.container.id)
       else
-        a.update_attributes(:project_id, a.container.project.id) if a.container.respond_to?(:project)
+        a.update_attribute(:project_id, a.container.project.id) if a.container.respond_to?(:project)
       end
     end
     

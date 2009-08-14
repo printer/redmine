@@ -32,7 +32,7 @@
 				<%= link_to_taska_attachments document, :find_conditions => {:current_version => nil} %>
 			</div>
 			<h3>
-			    <%= l(:label_document_created) %> <%= document.activity_created_by.name %>
+			    <%= l(:label_document_created) %> <%= document.activity_created_by.name unless document.activity_created_by.blank? %>
 				  <% if authorize_for('documents', 'edit') %>
 			    <span class="pipe">|</span>
 					<%= link_to l(:button_edit), {:controller => 'documents', :action => 'edit', :id => document}, :class => 'admin' %>

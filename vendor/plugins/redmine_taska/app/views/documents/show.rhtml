@@ -10,7 +10,7 @@
 	  <%= avatar @document.activity_created_by %>
   </div>
   <h1 class="title"><%= @document.title %></h1>
-  <p><span class="label"><%= l(:label_document_created) %>:</span> <%= @document.activity_created_by.name %></p>
+  <p><span class="label"><%= l(:label_document_created) %>:</span> <%= @document.activity_created_by.name unless @document.activity_created_by.blank? %></p>
   <p><span class="label"><%= l(:label_date) %>:</span> <%= format_time(@document.created_on) %></p>
   <p><span class="label"><%= l(:field_category) %>:</span> <%= link_to @document.category.name, :action => 'index', :project_id => @project, :category => @document.category.id %>
 </div>

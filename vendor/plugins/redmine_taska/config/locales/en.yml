@@ -37,6 +37,7 @@ en:
     label_activity_message: Forum
     label_activity_comment: Comment
     label_activity_issue-note: Comment
+    label_activity_issue-closed: Задача
     
     label_roadmap: Milestones
     label_roadmap_no_issues: No tasks for milestone

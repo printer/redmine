@@ -93,6 +93,7 @@ table.activity tr.event td.date {border-left: 1px solid rgb(239, 239, 239); bord
 .activity_wiki{color:white; background-color:rgb(36, 168, 158);}
 .activity_issue-note{color: white; background-color:rgb(100, 146, 172);}
 .activity_comment{color: white; background-color:rgb(100, 146, 172);}
+.activity_reply{color: white; background-color:rgb(100, 146, 172);}
 .activity_wiki-page{color:white; background-color:rgb(36, 168, 158);}
 .activity_attachment{color:white; background-color:rgb(122, 74, 119)}
 .activity_changeset{color:white; background-color:#666;}

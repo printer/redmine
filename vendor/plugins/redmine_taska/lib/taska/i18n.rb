@@ -19,8 +19,9 @@ module I18n
             end
           end
         end
-          raise InvalidPluralizationData.new(entry, count) unless entry.has_key?(key)
-          entry[key]
+        key = :other unless entry.has_key?(key)
+        raise InvalidPluralizationData.new(entry, count) unless entry.has_key?(key)
+        entry[key]
       end
     end
   end
