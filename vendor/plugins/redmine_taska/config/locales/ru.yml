@@ -52,6 +52,7 @@ ru:
     label_activity_message: Форум
     label_activity_comment: Комментарий
     label_activity_issue-note: Комментарий
+    label_activity_reply: Комментарий
     
     label_roadmap: Майлстоуны
     label_roadmap_no_issues: Нет задач для данного майлстоуна

@@ -98,6 +98,7 @@ table.activity tr.event td.date {border-left: 1px solid rgb(239, 239, 239); bord
 .activity_changeset{color:white; background-color:#666;}
 .activity_version{color:white; background-color:rgb(95, 110, 67);}
 .activity_message{border: 1px solid black;}
+.activity_reply{color: white; background-color:rgb(100, 146, 172);}
 
 
 #wiki-versions input { font-size: 11px; }
