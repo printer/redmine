@@ -15,7 +15,7 @@
 
 <%= render(:partial => "wiki/content", :locals => {:content => @content}) %>
 
-<%= link_to_attachments @page %>
+<%= link_to_taska_attachments @page, :find_conditions => {:current_version => nil} %>
 
 <% if @editable && authorize_for('wiki', 'add_attachment') %>
 <div id="wiki_add_attachment">

@@ -37,7 +37,7 @@ en:
     label_activity_message: Forum
     label_activity_comment: Comment
     label_activity_issue-note: Comment
-    label_activity_issue-closed: Задача
+    label_activity_issue-closed: Task
     
     label_roadmap: Milestones
     label_roadmap_no_issues: No tasks for milestone
@@ -51,6 +51,7 @@ en:
     
     label_attachments_all: All
     label_attachments_documents: Documents
+    label_attachments_wiki: Wiki
     
     label_wiki_versions: Versions
     label_wiki_compare: Check two and

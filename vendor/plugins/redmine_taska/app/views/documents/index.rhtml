@@ -21,7 +21,7 @@
 
 <% if @grouped.empty? %><p class="nodata"><%= l(:label_no_data) %></p><% end %>
 
-<% @grouped.keys.sort.each do |group| %>
+<% @grouped.keys.each do |group| %>
     <h3 class="date"><span><%= format_activity_day(group) %></span></h3>
     <% @grouped[group].each do |document| %>
 		<div class="message">

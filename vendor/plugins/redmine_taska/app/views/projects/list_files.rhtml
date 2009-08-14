@@ -21,9 +21,11 @@
       </h1> 
       <p>
       	<% if f.container.is_a? Document %>
-				  <%= link_to f.container.title, {:controller => 'documents', :action => 'show', :id => f.container} %>
-				  &mdash;
+				  <%=l(:label_document) %>: <%= link_to f.container.title, {:controller => 'documents', :action => 'show', :id => f.container} %>
+				  <% unless f.container.description.blank? %>&mdash;<% end %>
 				  <%= truncate f.container.description, 60, '...' %>
+				<% elsif f.container.is_a? WikiPage %>
+					<%=l(:label_wiki) %>: <%= link_to f.container.title, {:controller => 'wiki', :id => f.container.wiki.project_id, :page => f.container.title}%>
 				<% end %>
       </p>
       <h3>
@@ -77,7 +79,7 @@
 <div class="categories">
 <h3><%= l(:field_category) %></h3>
 <%= link_to "<span>#{l(:label_documents_category_any)}</span>", {:controller => 'projects', :action => 'list_files', :project_id => @project}, :class => @category.blank? ? 'selected' : nil %>
-<% %w(documents).each do |dc| %>
+<% %w(documents wiki).each do |dc| %>
 	<%= link_to "<span>#{l('label_attachments_'+dc)}</span>", {:controller => 'projects', :action => 'list_files', :project_id => @project, :category => dc}, :class => @category == dc ? 'selected' : nil %></span>
 <% end %>
 </div>

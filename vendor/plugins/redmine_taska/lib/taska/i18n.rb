@@ -12,7 +12,7 @@ module I18n
             key = :many
           elsif key.nil?
             key ||= case count % 10
-              when 0 then :few
+              when 0 then :many
               when 1 then :one
               when 2..4 then :few
               when 5..9 then :many

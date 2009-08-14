@@ -11,9 +11,9 @@ class DocumentsController < ApplicationController
     conditions = {}
     conditions[:category_id] = @category unless @category.nil?
     
-    documents = @project.documents.find :all, :conditions => conditions, :include => [:attachments, :category]
+    documents = @project.documents.find :all, :conditions => conditions, :include => [:attachments, :category], :order => 'created_on DESC'
     
-    @grouped = documents.group_by {|d| d.created_on.to_date }
+    @grouped = documents.group_by{|d| d.created_on.to_date}.sort{|a,b| b[0] <=> a[0]}
     @document = @project.documents.build
     
     render :layout => false if request.xhr?

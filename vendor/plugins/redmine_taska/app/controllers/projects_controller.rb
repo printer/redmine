@@ -50,6 +50,8 @@ class ProjectsController < ApplicationController
 
     if @category == 'documents'
       conditions.merge!({:container_type => 'Document'})
+    elsif @category == 'wiki'
+      conditions.merge!({:container_type => 'WikiPage'})
     else
       @category = nil
     end
