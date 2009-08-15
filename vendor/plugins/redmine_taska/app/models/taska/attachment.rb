@@ -1,4 +1,5 @@
 require 'ftools'
+require 'RMagick'
 
 module Taska
   module Attachment
@@ -21,7 +22,36 @@ module Taska
     end
     
     def after_save
-      File.syscopy(diskfile, thumb) if image?
+      thumbnail(diskfile, thumb, 200) if image? && !File.file?(thumb)
+    end
+    
+    def thumbnail(source, target, width, height = nil)
+      return nil unless File.file?(source)
+      height ||= width
+
+      img = Magick::Image.read(source).first
+      
+      if img.columns > width && img.rows > height 
+        rows, cols = img.rows, img.columns
+        
+        source_aspect = cols.to_f / rows
+        target_aspect = width.to_f / height
+        thumbnail_wider = target_aspect > source_aspect
+
+        factor = thumbnail_wider ? width.to_f / cols : height.to_f / rows
+        img.thumbnail!(factor)
+        img.crop!(Magick::CenterGravity, width, height)
+      else
+        img.resize_to_fit(width, height)
+        foo = Magick::Image.new(width, height) {
+         self.background_color = 'white'
+        }
+        
+        img = foo.composite(img, Magick::CenterGravity, Magick::OverCompositeOp)
+      end
+
+      FileUtils.mkdir_p(File.dirname(target))
+      img.write(target) { self.quality = 75 }
     end
     
     def thumb_uri

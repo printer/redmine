@@ -8,6 +8,8 @@ require 'taska/redmine/activity'
 require 'taska/redmine/activity/fetcher'
 require 'taska/i18n'
 
+gem 'rmagick'
+
 ActionView::Base.send(:include, AdditionalMenuHelper)
 ActionView::Base.send(:include, TaskaHelper)
 

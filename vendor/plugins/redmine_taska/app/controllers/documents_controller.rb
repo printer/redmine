@@ -45,6 +45,11 @@ class DocumentsController < ApplicationController
     end
   end
   
+  def destroy_comment
+    @document.comments.find(params[:comment_id]).destroy
+    redirect_to :action => 'show', :id => @document
+  end
+  
   alias_method_chain :index, :taska
   alias_method_chain :show, :taska
   alias_method_chain :edit, :taska
