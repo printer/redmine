@@ -8,6 +8,7 @@ module Taska
         belongs_to :project
         
         alias_method_chain :before_save, :taska
+        alias_method_chain :touch_activity_updated, :downloading
       end
     end
     
@@ -64,6 +65,9 @@ module Taska
      
     def activity_action
       'uploaded'
+    end
+    
+    def touch_activity_updated_with_downloading
     end
   end
 end
