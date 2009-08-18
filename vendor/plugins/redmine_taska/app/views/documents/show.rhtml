@@ -29,7 +29,7 @@
     <div class="float_liner">
 		  <% unless (avatar @document.activity_created_by).blank? %>
 			<div style="float:left; margin-right: 10px;">
-			  <%= avatar @document.activity_created_by %>
+			  <%= avatar comment.author %>
 		  </div>
       <div class="indented">
 			<% end %>

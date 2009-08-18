@@ -2,7 +2,7 @@ module Taska
   module Comment
     def self.included(base)
       base.class_eval do
-        acts_as_event :title => Proc.new {|o| "123"},
+        acts_as_event :title => Proc.new {|o| o.commented_type == 'Document' ? "RE: #{o.commented.title}" : 'RE: ...'},
                       :description => :comments,
                       :datetime => :updated_on,
                       :type => 'comment',
