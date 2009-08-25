@@ -17,7 +17,7 @@
 
     <div class="file_info">
       <h1>
-				<%= link_to_attachment f %> 
+				<%= link_to_attachment f %><% unless f.description.blank? %> &mdash; <span style="font-weight:normal;"><%= f.description %></span><% end %>
       </h1> 
       <p>
       	<% if f.container.is_a? Document %>
@@ -31,11 +31,11 @@
       <h3>
 				<%= "#{@versions[f.id].length + 1}) " unless @versions[f.id].blank? %>
 				<%= f.author.name %>, <%= number_to_human_size f.filesize %>
-				    <span class="pipe">-</span>
+				    <% if authorize_for 'attachments', 'new_version' %><span class="pipe">-</span><% end %>
 				    <span>
-						<%= link_to l(:label_files_upload_new_version), {:controller => 'attachments', :action => 'new_version', :id => f} %>
-						<span class="pipe">|</span>
+						<%= link_to_if_authorized l(:label_files_upload_new_version), {:controller => 'attachments', :action => 'new_version', :id => f} %>
 					  <% if delete_allowed %>
+							<span class="pipe">|</span>
 					    <%= link_to l(:button_delete), {:controller => 'attachments', :action => 'destroy', :id => f},
 					                                         :confirm => l(:text_are_you_sure),
 					                                         :method => :post,

@@ -44,6 +44,7 @@ en:
     label_milestone_new: New milestone
     label_milestone_plural: Milestones
     label_milestones_late: Late  by
+    label_milestones_today: Today
     
     field_closed: Closed
     

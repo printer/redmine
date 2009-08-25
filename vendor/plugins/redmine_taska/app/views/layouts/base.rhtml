@@ -27,10 +27,10 @@
       
 <div id="header">
     <div id="top-right-menu">
-        <span class="pipe">|</span>
+        <% if User.current.logged? %><span class="pipe">|</span><% end %>
         <%= render_piped_menu :account_menu -%>
     </div>
-	<%= content_tag('div', "#{link_to_user(User.current)}", :id => 'loggedas') if User.current.logged? %>
+		<%= content_tag('div', "#{link_to_user(User.current)}", :id => 'loggedas') if User.current.logged? %>
     
     <h1><%= page_header_title %><% unless @project.blank? %><%= link_to l(:label_back_home), :home %><% end %></h1>
     

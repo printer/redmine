@@ -60,6 +60,7 @@ ru:
     label_milestone_new: Новый майлстоун
     label_milestone_plural: Майлстоуны
     label_milestones_late: Опоздание на
+    label_milestones_today: Сегодня
     
     field_closed: Закрыт
 

@@ -16,8 +16,12 @@ module Taska
                                   :author_key => 'activity_created_by_id',
                                   :find_options => {:include => :project}
        
-        def self.find_late
-          find(:all, :conditions => ["closed = ? AND effective_date < ?", 0, DateTime.now])
+        def self.find_late(project = nil)
+          if project.blank? 
+            find(:all, :conditions => ["closed = ? AND effective_date < ?", 0, DateTime.now])
+          else
+            find(:all, :conditions => ["project_id = ? AND closed = ? AND effective_date < ?", project.id, 0, DateTime.now])
+          end
         end
                                   
         alias_method_chain :completed?, :taska

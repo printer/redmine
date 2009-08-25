@@ -7,6 +7,7 @@ require 'taska/acts_as_activity_provider'
 require 'taska/redmine/activity'
 require 'taska/redmine/activity/fetcher'
 require 'taska/i18n'
+require 'taska/redmine/access_control'
 
 require 'RMagick'
 
@@ -47,12 +48,17 @@ Redmine::Activity.map do |activity|
   activity.register :messages, :default => false
 end
 
+Redmine::AccessControl.delete :manage_files
+
 Redmine::AccessControl.map do |map|
   map.permission :view_versions, {}, :public => true
   map.permission :view_comments, {}, :public => true
   map.project_module :documents do |map|
     map.permission :comment_documents, {:documents => :add_comment}
     map.permission :manage_comments, {:documents => :destroy_comment}, :require => :loggedin
+  end
+  map.project_module :files do |map|
+    map.permission :manage_files, {:projects => :add_file, :attachments => :new_version}, :require => :loggedin
   end
 end
 

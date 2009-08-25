@@ -25,9 +25,15 @@
 				<ul>
 				<% @late.each do |l| %>
 			    <li>
-						<strong><%= l(:label_milestones_late) %> <%= I18n.t(:x_days, :count => (DateTime.now - l.effective_date).to_i, :scope => 'datetime.distance_in_words') %></strong>: 
-						<%= link_to_version l %>
-						<%= "/#{l(:field_responsible)} #{l.responsible.name}/" unless l.responsible.blank? %>
+						<% if (DateTime.now - l.effective_date).to_i + 1 > 0 %>
+							<strong><%= l(:label_milestones_late) %> <%= I18n.t(:x_days, :count => (DateTime.now - l.effective_date).to_i + 1, :scope => 'datetime.distance_in_words') %></strong>: 
+							<%= link_to_version l %> 
+							/<%= l.project.name %><%= ", #{l(:field_responsible)} #{l.responsible.name}" unless l.responsible.blank? %>/
+						<% else %>
+							<strong><%= l(:label_milestones_today) %>:</strong> 
+							<%= link_to_version l %> 
+							/<%= l.project.name %><%= ", #{l(:field_responsible)} #{l.responsible.name}" unless l.responsible.blank? %>/
+						<% end %>
 					</li>
 				<% end %>
 				</ul>

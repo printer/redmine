@@ -40,7 +40,7 @@ class ProjectsController < ApplicationController
     @activity = Redmine::Activity::Fetcher.new(User.current, :project => @project)
     @events   = @activity.events(nil, nil, :limit => 50).group_by{|e| e.activity_updated_at.to_date}
     
-    @late = Version.find_late
+    @late = Version.find_late(@project)
   end
   
   def list_files_with_taska

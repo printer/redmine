@@ -3,6 +3,8 @@ require_dependency 'attachments_controller'
 class AttachmentsController < ApplicationController
   unloadable
   
+  before_filter :authorize, :only => :new_version
+  
   def list_images
     @attachment.inspect
     @container = @attachment.container
