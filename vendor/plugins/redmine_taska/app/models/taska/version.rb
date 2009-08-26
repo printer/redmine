@@ -30,7 +30,7 @@ module Taska
     end
     
     def completed_with_taska?
-      closed == "1"
+      closed == "1" || closed == true
     end
     
     def activity_action_with_closed
